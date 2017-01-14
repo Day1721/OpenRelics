@@ -81,18 +81,18 @@ namespace DatabaseFiller
             using (var progress = new ProgressBar())
             {
                 int counter = 0;
-//                foreach (var relic in parsed.Relics)
-//                {
-//                    db.Relics.Add(relic);
-//                    counter++;
-//                    progress.Report((double) counter / (parsed.Relics.Count + parsed.Connections.Count));
-//                }
+                foreach (var relic in parsed.Relics)
+                {
+                    db.Relics.Add(relic);
+                    counter++;
+                    progress.Report((double) counter / (parsed.Relics.Count + parsed.Connections.Count));
+                }
 
                 foreach (var connection in parsed.Connections)
                 {
                     db.Connections.Add(connection);
                     counter++;
-                    progress.Report((double) counter / (/*parsed.Relics.Count + */parsed.Connections.Count));
+                    progress.Report((double) counter / (parsed.Relics.Count + parsed.Connections.Count));
                 }
 
                     Console.WriteLine($"\nDone. {db.SaveChanges()} changes made.\n" +
