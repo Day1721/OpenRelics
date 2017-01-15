@@ -6,15 +6,16 @@ app.controller('IndexController', function ($scope, $http) {
     $http({
         method: 'GET',
         url: '/api/relics/queries'
-    }).then(function successCallback(response) {
+    }).then(function success(response) {
             queries = response.data;
         },
-        function errorCallback(response) {
+        function error(response) {
             alert(response.statusText);
         });
 
     $scope.onSelect = function() {
-        var index = queries.indexOf($scope.selected);
+        $scope.index = queries.indexOf($scope.selected);
+        /*
         switch (index) {
             case 0:
                 //show ui for getByID
@@ -27,8 +28,101 @@ app.controller('IndexController', function ($scope, $http) {
             
             default:
         }
-
+        */
     };
+
+    $scope.voivodeships = [
+        'dolnośląskie',
+        'kujawsko-pomorskie',
+        'lubelskie',
+        'lubuskie',
+        'łódzkie',
+        'małopolskie',
+        'mazowieckie',
+        'opolskie',
+        'podkarpackie',
+        'podlaskie',
+        'pomorskie',
+        'śląskie',
+        'świętokrzyskie',
+        'warmińsko-mazurskie',
+        'wielkopolskie',
+        'zachodniopomorskie'
+    ];
+
+    $scope.districts = {
+        'dolnośląskie': [
+            'Wrocław',
+            'Jelenia Góra',
+            'Legnica',
+            'Wałbrzych',
+            'bolesławiecki',
+            'dzierżoniowski',
+            'głogowski',
+            'górowski',
+            'jaworski',
+            'jeleniogórski',
+            'kamiennogórski',
+            'kłodzki',
+            'legnicki',
+            'lubański',
+            'lubiński',
+            'lwówecki',
+            'milicki',
+            'oleśnicki', 
+            'oławski',
+            'polkowicki',
+            'strzeliński',
+            'średzki',
+            'świdnicki',
+            'trzebnicki',
+            'wałbrzyski',
+            'wołowski',
+            'wrocławski', 
+            'ząbkowicki',
+            'zgorzelecki',
+            'złotoryjski'
+        ],
+        'kujawsko-pomorskie': [
+            'Bydgoszcz',
+            'Toruń',
+            'Włocławek',
+            'Grudziądz',
+            'aleksandrowski',
+            'brodnicki',
+            'bydgoski',
+            'chełmiński',  
+            'golubsko-dobrzyński',
+            'grudziądzki',
+            'inowrocławski',
+            'lipnowski',
+            'mogileński',
+            'nakielski',
+            'radziejowski',
+            'rypiński',
+            'sępoleński', 
+            'świecki',
+            'toruński',
+            'tucholski',
+            'wąbrzeski',
+            'włocławski',
+            'żniński'
+        ],
+        'lubelskie': [],
+        'lubuskie': [],
+        'łódzkie': [],
+        'małopolskie': [],
+        'mazowieckie': [],
+        'opolskie': [],
+        'podkarpackie': [],
+        'podlaskie': [],
+        'pomorskie': [],
+        'śląskie': [],
+        'świętokrzyskie': [],
+        'warmińsko-mazurskie': [],
+        'wielkopolskie': [],
+        'zachodniopomorskie': []
+    }
 
     /*
     $scope.queries = [

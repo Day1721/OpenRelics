@@ -11,5 +11,14 @@
         }
     </select>
     {{selected}}
+    <div ng-if="selected == 'Get by ID'">
+        @using (Html.BeginForm("GetById", "Relics", FormMethod.Get))
+        {
+            @Html.Label("Id")
+            @Html.TextBox("Id")
+            @Html.ValidationMessage("Id")
+            <input type="submit" value="Submit" class="btn"/>
+        }
+    </div>
 </div>
 @Scripts.Render("~/bundles/relics")

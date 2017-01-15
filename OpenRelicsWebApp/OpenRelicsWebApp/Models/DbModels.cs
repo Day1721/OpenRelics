@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenRelicsWebApp.Models
 {
-    class Relic
+    public class Relic
     {
         [Key]
         public int Id { get; set; }

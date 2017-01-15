@@ -10,7 +10,8 @@ namespace OpenRelicsWebApp.Controllers
     [RoutePrefix("api/relics")]
     public class RelicsApiController : ApiController
     {
-        private readonly RelicsDbContext db = new RelicsDbContext();
+        //private readonly RelicsDbContext db = new RelicsDbContext();
+        private readonly DbAccessor _accessor = new DbAccessor();
 
         //GET: api/relics/queries
         [HttpGet, Route("queries")]
@@ -20,61 +21,45 @@ namespace OpenRelicsWebApp.Controllers
         [HttpGet, Route("get-by-id/{id}")]
         public IHttpActionResult GetDataById(int id)
         {
-            var res =
-                from relic in db.Relics
-                where relic.Id == id
-                select relic;
+            var res = _accessor.GetById(id);
+            if (res == null)
+                return BadRequest("There is no relic with given id");
 
-            if (!res.Any()) return BadRequest("There is no relic with given id");
-
-            return Ok(res.First());
+            return Ok(res);
         }
 
         //GET: api/relics/get-direct-descendants/{id}
         [HttpGet, Route("get-direct-descendants")]
         public IHttpActionResult GetDirectDescendants(int id)
         {
-            var check =
-                from relic in db.Relics
-                where relic.Id == id
-                select relic;
+            var check = _accessor.GetById(id);
 
-            if (!check.Any()) return BadRequest("There is no relic with given id");
+            if (check == null) return BadRequest("There is no relic with given id");
 
-            return Ok(
-                from connection in db.Connections
-                where connection.Ascendant == id
-                select connection.Descendant);
+            return Ok(_accessor.GetDirectDescendants(id));
+
         }
 
         //GET: api/relics/get-all-descendants/{id}
         [HttpGet, Route("get-all-descendants")]
         public IHttpActionResult GetAllDescendants(int id)
         {
-            var check =
-                from relic in db.Relics
-                where relic.Id == id
-                select relic;
+            var check = _accessor.GetById(id);
 
-            if (!check.Any()) return BadRequest("There is no relic with given id");
+            if (check == null) return BadRequest("There is no relic with given id");
 
-            var res = new List<int>();
-            Queue<int> queue = new Queue<int>();
-            queue.Enqueue(id);
-            while (!queue.Any())
-            {
-                int subid = queue.Dequeue();
-                var descendants = 
-                    from connection in db.Connections
-                    where connection.Ascendant == id
-                    select connection.Descendant;
-                foreach (var descendant in descendants)
-                {
-                    res.Add(descendant);
-                    queue.Enqueue(descendant);
-                }
-            }
-            return Ok(res);
+            
+            return Ok(_accessor.GetAllDescendants(id));
+        }
+
+        //GET: api/relics/all-from-region
+        [HttpGet, Route("get-all-from-region")]
+        public IHttpActionResult GetAllFromRegion([FromUri]LocationViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_accessor.GetAllFromRegion(model));
         }
     }
 }

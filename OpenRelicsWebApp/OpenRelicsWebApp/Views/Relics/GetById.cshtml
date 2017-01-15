@@ -1,0 +1,23 @@
+﻿@model OpenRelicsWebApp.Models.Relic
+
+@if (Model == null)
+{
+    <h2>Relic was not found</h2>
+}
+else
+{
+    <ul>
+        <li>ID: @Model.Id</li>
+        <li>Name: @Model.Name</li>
+        <li>State: @Model.State</li>
+        <li>Register number: @Model.RegisterNumber</li>
+        <li>Dating: @Model.Dating</li>
+        <li>Latitude: @Model.Latitude</li>
+        <li>Longitude: @Model.Longitude</li>
+        <li>Place ID: @Model.PlaceId</li>
+        <li>Place name: @Model.PlaceName</li>
+        <li>Commune name: @Model.CommuneName</li>
+        <li>District name: @Model.DistrictName</li>
+        <li>Voivodeship name: @Model.VoivodeshipName</li>
+    </ul>
+}

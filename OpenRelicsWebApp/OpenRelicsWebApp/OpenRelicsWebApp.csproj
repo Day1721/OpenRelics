@@ -173,8 +173,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbAccessor.cs" />
     <Compile Include="Models\DbModels.cs" />
     <Compile Include="Models\RelicsDbContext.cs" />
+    <Compile Include="Models\RelicsInputViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +231,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Relics\Index.cshtml" />
+    <Content Include="Views\Relics\GetById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
