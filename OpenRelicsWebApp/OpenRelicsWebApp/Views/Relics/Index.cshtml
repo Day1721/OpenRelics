@@ -1,0 +1,15 @@
+﻿@model List<string>
+
+<div ng-controller="IndexController">
+    <h2>Hello. Please select query</h2>
+
+    <select ng-model="selected" ng-change="onSelect()">
+        
+        @foreach (var query in Model)
+        {
+            <option>@query</option>
+        }
+    </select>
+    {{selected}}
+</div>
+@Scripts.Render("~/bundles/relics")
