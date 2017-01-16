@@ -23,13 +23,15 @@ namespace OpenRelicsWebApp.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Open relics";
+            System.Diagnostics.Debug.WriteLine(AppDomain.CurrentDomain.GetData("DataDirectory"));
+            /*
             ViewBag.ToMethod = new Dictionary<string, string>
             {
                 {"Get by ID", "GetById"},
                 {"Get direct descendants", "GetDirectDescendants"},
                 {"Get all descendants", "GetAllDescendants"},
                 {"Get all relics from given region", "GetAllFromRegion"}
-            };
+            };*/
             return View(Queries);
         }
 

@@ -2,7 +2,7 @@
 
 app.controller('IndexController', function ($scope, $http) {
     var queries;
-
+    /*
     $scope.toMethod = {
         'Get by ID': 'GetById',
         'Get direct descendants': 'GetDirectDescendants',
@@ -16,7 +16,7 @@ app.controller('IndexController', function ($scope, $http) {
     $scope.contains = function (collection, elem) {
         return collection.indexOf(elem) !== -1;
     }
-
+    */
     $http({
         method: 'GET',
         url: '/api/relics/queries'

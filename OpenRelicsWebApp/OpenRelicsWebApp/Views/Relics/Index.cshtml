@@ -1,5 +1,14 @@
 ﻿@model List<string>
 
+@{
+    var queries = new List<Tuple<string, string>>
+    {
+        Tuple.Create("Get by ID", "GetByID"),
+        Tuple.Create("Get direct descendants", "GetDirectDescendants"),
+        Tuple.Create("Get all descendants", "GetAllDescendants")
+    };
+}
+
 <div ng-controller="IndexController">
     <h2>Hello. Please select query</h2>
 
@@ -11,7 +20,42 @@
         }
     </select>
     {{selected}}
-    <div ng-if="contains(onlyIdList, selected)">
+    @foreach (var method in queries)
+    {
+        <div ng-if="selected === '@method.Item1'">
+            @using (Html.BeginForm(method.Item2, "Relics", FormMethod.Get))
+            {
+                @Html.Label("Id")
+                @Html.TextBox("Id")
+                @Html.ValidationMessage("Id")
+                <input type="submit" value="Submit" class="btn" />
+            }
+        </div>
+    }
+    <div ng-if="selected === 'Get all relics from given region'">
+        @using (Html.BeginForm("GetAllFromRegion", "Relics", FormMethod.Get))
+        {
+            @Html.Label("PlaceName", "Place name")
+            @Html.TextBox("PlaceName")
+            @Html.ValidationMessage("PlaceName")
+
+            @Html.Label("Commune name", "CommuneName")
+            @Html.TextBox("CommuneName")
+            @Html.ValidationMessage("CommuneName")
+
+            @Html.Label("District name", "DistrictName")
+            @Html.TextBox("DistrictName")
+            @Html.ValidationMessage("DistrictName")
+
+            @Html.Label("Voivodeship name", "VoivodeshipName")
+            @Html.TextBox("VoivodeshipName")
+            @Html.ValidationMessage("VoivodeshipName")
+
+            <input type="submit" value="Submit" class="btn" />
+        }
+    </div>
+    <!--
+    <div ng-if="selected === 'Get by ID'">
         @using (Html.BeginForm("GetById", "Relics", FormMethod.Get))
         {
             @Html.Label("Id")
@@ -20,8 +64,23 @@
             <input type="submit" value="Submit" class="btn"/>
         }
     </div>
-    <div ng-if="contains(onlyLocationList, selected)">
-        @using(Html.BeginForm())
+    <div ng-if="selected === 'Get direct descendants'">
+        @using (Html.BeginForm("GetDirectDescendants", "Relics", FormMethod.Get))
+        {
+            @Html.Label("Id")
+            @Html.TextBox("Id")
+            @Html.ValidationMessage("Id")
+            <input type="submit" value="Submit" class="btn" />
+        }
     </div>
+    <div ng-if="selected === 'Get all descendants'">
+        @using (Html.BeginForm("GetAllDescendants", "Relics", FormMethod.Get))
+        {
+            @Html.Label("Id")
+            @Html.TextBox("Id")
+            @Html.ValidationMessage("Id")
+            <input type="submit" value="Submit" class="btn" />
+        }
+    </div>-->
 </div>
 @Scripts.Render("~/bundles/relics")

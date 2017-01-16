@@ -1,2 +1,19 @@
 ﻿@model IQueryable<int>
 
+@if (Model == null)
+{
+    <h2>Input data was wrong</h2>
+}
+else if (!Model.Any())
+{
+    <h2>There's no relics in given region</h2>
+}
+else
+{
+    <ul>
+        @foreach (var relic in Model)
+        {
+            <li>@relic</li>
+        }
+    </ul>
+}
