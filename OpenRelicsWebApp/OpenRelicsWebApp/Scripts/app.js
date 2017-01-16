@@ -2,21 +2,7 @@
 
 app.controller('IndexController', function ($scope, $http) {
     var queries;
-    /*
-    $scope.toMethod = {
-        'Get by ID': 'GetById',
-        'Get direct descendants': 'GetDirectDescendants',
-        'Get all descendants': 'GetAllDescendants',
-        'Get all relics from given region': 'GetAllFromRegion'
-    }
-
-    $scope.onlyIdList = ['Get by ID', 'Get direct descendants', 'Get all descendants'];
-    $scope.onlyLocationList = ['Get all relics from given region'];
-
-    $scope.contains = function (collection, elem) {
-        return collection.indexOf(elem) !== -1;
-    }
-    */
+    
     $http({
         method: 'GET',
         url: '/api/relics/queries'
@@ -29,21 +15,7 @@ app.controller('IndexController', function ($scope, $http) {
 
     $scope.onSelect = function() {
         $scope.index = queries.indexOf($scope.selected);
-        /*
-        switch (index) {
-            case 0:
-                //show ui for getByID
-            case 1:
-                //show ui for directDescendants
-            case 2:
-                //show ui for allDescendants
-            case 3:
-                //show ui for allFromRegion
-            
-            default:
-        }
-        */
-    };
+        };
 
     $scope.voivodeships = [
         'dolnośląskie',
@@ -137,12 +109,4 @@ app.controller('IndexController', function ($scope, $http) {
         'wielkopolskie': [],
         'zachodniopomorskie': []
     }
-
-    /*
-    $scope.queries = [
-        'Get by ID',
-        'Get direct descendants',
-        'Get all descendants',
-        'Get all relics from given region '
-    ];*/
 });

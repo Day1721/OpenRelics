@@ -19,7 +19,7 @@
             <option>@query</option>
         }
     </select>
-    {{selected}}
+    <!--{{selected}}-->
     @foreach (var method in queries)
     {
         <div ng-if="selected === '@method.Item1'">
@@ -35,52 +35,27 @@
     <div ng-if="selected === 'Get all relics from given region'">
         @using (Html.BeginForm("GetAllFromRegion", "Relics", FormMethod.Get))
         {
-            @Html.Label("PlaceName", "Place name")
-            @Html.TextBox("PlaceName")
-            @Html.ValidationMessage("PlaceName")
-
-            @Html.Label("Commune name", "CommuneName")
-            @Html.TextBox("CommuneName")
-            @Html.ValidationMessage("CommuneName")
-
-            @Html.Label("District name", "DistrictName")
-            @Html.TextBox("DistrictName")
-            @Html.ValidationMessage("DistrictName")
-
-            @Html.Label("Voivodeship name", "VoivodeshipName")
-            @Html.TextBox("VoivodeshipName")
-            @Html.ValidationMessage("VoivodeshipName")
+            <table>
+                <tr>
+                    <td>@Html.Label("PlaceName", "Place name")</td>
+                    <td>@Html.TextBox("PlaceName")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Commune name", "CommuneName")</td>
+                    <td>@Html.TextBox("CommuneName")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("District name", "DistrictName")</td>
+                    <td>@Html.TextBox("DistrictName")</td>
+                </tr>
+                <tr>
+                    <td>@Html.Label("Voivodeship name", "VoivodeshipName")</td>
+                    <td>@Html.TextBox("VoivodeshipName")</td>
+                </tr>
+            </table>
 
             <input type="submit" value="Submit" class="btn" />
         }
     </div>
-    <!--
-    <div ng-if="selected === 'Get by ID'">
-        @using (Html.BeginForm("GetById", "Relics", FormMethod.Get))
-        {
-            @Html.Label("Id")
-            @Html.TextBox("Id")
-            @Html.ValidationMessage("Id")
-            <input type="submit" value="Submit" class="btn"/>
-        }
-    </div>
-    <div ng-if="selected === 'Get direct descendants'">
-        @using (Html.BeginForm("GetDirectDescendants", "Relics", FormMethod.Get))
-        {
-            @Html.Label("Id")
-            @Html.TextBox("Id")
-            @Html.ValidationMessage("Id")
-            <input type="submit" value="Submit" class="btn" />
-        }
-    </div>
-    <div ng-if="selected === 'Get all descendants'">
-        @using (Html.BeginForm("GetAllDescendants", "Relics", FormMethod.Get))
-        {
-            @Html.Label("Id")
-            @Html.TextBox("Id")
-            @Html.ValidationMessage("Id")
-            <input type="submit" value="Submit" class="btn" />
-        }
-    </div>-->
 </div>
 @Scripts.Render("~/bundles/relics")

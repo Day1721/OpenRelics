@@ -65,7 +65,7 @@ namespace OpenRelicsWebApp.Controllers
             if (ModelState.IsValid)
                 return View(_accessor.GetAllFromRegion(model));
 
-            return View(null as IQueryable<int>);
+            return View(null as IQueryable<Relic>);
         }
     }
 }

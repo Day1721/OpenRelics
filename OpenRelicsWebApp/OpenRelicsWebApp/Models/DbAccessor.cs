@@ -21,17 +21,19 @@ namespace OpenRelicsWebApp.Models
             return res.First();
         }
 
-        public List<int> GetDirectDescendants(int id)
+        public IEnumerable<Relic> GetDirectDescendants(int id)
         {
             var res =
                 from connection in _db.Connections
                 where connection.Ascendant == id
                 select connection.Descendant;
 
-            return res.ToList();
+            return from relic in _db.Relics
+                   where res.Contains(relic.Id)
+                   select relic;
         }
 
-        public List<int> GetAllDescendants(int id)
+        public IEnumerable<Relic> GetAllDescendants(int id)
         {
             var res = new List<int>();
             Queue<int> queue = new Queue<int>();
@@ -49,23 +51,26 @@ namespace OpenRelicsWebApp.Models
                     queue.Enqueue(descendant);
                 }
             }
-            return res;
+            return from relic in _db.Relics
+                   where res.Contains(relic.Id)
+                   select relic;
+
         }
 
-        public IQueryable<int> GetAllFromRegion(LocationViewModel model)
+        public IQueryable<Relic> GetAllFromRegion(LocationViewModel model)
         {
             if (string.IsNullOrEmpty(model.DistrictName))
                 return 
                     from relic in _db.Relics
                     where relic.VoivodeshipName == model.VoivodeshipName
-                    select relic.Id;
+                    select relic;
 
             if (string.IsNullOrEmpty(model.CommuneName))
                 return 
                     from relic in _db.Relics
                     where relic.VoivodeshipName == model.VoivodeshipName
                           && relic.DistrictName == model.DistrictName
-                    select relic.Id;
+                    select relic;
 
             if (string.IsNullOrEmpty(model.PlaceName))
                 return
@@ -73,7 +78,7 @@ namespace OpenRelicsWebApp.Models
                     where relic.VoivodeshipName == model.VoivodeshipName
                           && relic.DistrictName == model.DistrictName
                           && relic.CommuneName == model.CommuneName
-                    select relic.Id;
+                    select relic;
 
             return 
                 from relic in _db.Relics
@@ -81,7 +86,7 @@ namespace OpenRelicsWebApp.Models
                       && relic.DistrictName == model.DistrictName
                       && relic.CommuneName == model.CommuneName
                       && relic.PlaceName == model.PlaceName
-                select relic.Id;
+                select relic;
         }
     }
 }
