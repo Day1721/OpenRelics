@@ -3,6 +3,20 @@
 app.controller('IndexController', function ($scope, $http) {
     var queries;
 
+    $scope.toMethod = {
+        'Get by ID': 'GetById',
+        'Get direct descendants': 'GetDirectDescendants',
+        'Get all descendants': 'GetAllDescendants',
+        'Get all relics from given region': 'GetAllFromRegion'
+    }
+
+    $scope.onlyIdList = ['Get by ID', 'Get direct descendants', 'Get all descendants'];
+    $scope.onlyLocationList = ['Get all relics from given region'];
+
+    $scope.contains = function (collection, elem) {
+        return collection.indexOf(elem) !== -1;
+    }
+
     $http({
         method: 'GET',
         url: '/api/relics/queries'

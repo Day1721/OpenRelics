@@ -11,7 +11,7 @@
         }
     </select>
     {{selected}}
-    <div ng-if="selected == 'Get by ID'">
+    <div ng-if="contains(onlyIdList, selected)">
         @using (Html.BeginForm("GetById", "Relics", FormMethod.Get))
         {
             @Html.Label("Id")
@@ -19,6 +19,9 @@
             @Html.ValidationMessage("Id")
             <input type="submit" value="Submit" class="btn"/>
         }
+    </div>
+    <div ng-if="contains(onlyLocationList, selected)">
+        @using(Html.BeginForm())
     </div>
 </div>
 @Scripts.Render("~/bundles/relics")

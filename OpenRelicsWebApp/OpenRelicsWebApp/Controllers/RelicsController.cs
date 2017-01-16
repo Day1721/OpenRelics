@@ -23,13 +23,47 @@ namespace OpenRelicsWebApp.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Open relics";
+            ViewBag.ToMethod = new Dictionary<string, string>
+            {
+                {"Get by ID", "GetById"},
+                {"Get direct descendants", "GetDirectDescendants"},
+                {"Get all descendants", "GetAllDescendants"},
+                {"Get all relics from given region", "GetAllFromRegion"}
+            };
             return View(Queries);
         }
 
         public ActionResult GetById(int id)
         {
             return View(_accessor.GetById(id));
+        }
 
+        public ActionResult GetDirectDescendants(int id)
+        {
+            var check = _accessor.GetById(id);
+
+            if (check == null)
+                return View("GetDescendants", null);
+
+            return View("GetDescendants", _accessor.GetDirectDescendants(id));
+        }
+
+        public ActionResult GetAllDescendants(int id)
+        {
+            var check = _accessor.GetById(id);
+
+            if (check == null)
+                return View("GetDescendants", null);
+
+            return View("GetDescendants", _accessor.GetAllDescendants(id));
+        }
+
+        public ActionResult GetAllFromRegion([FromUri] LocationViewModel model)
+        {
+            if (ModelState.IsValid)
+                return View(_accessor.GetAllFromRegion(model));
+
+            return View(null as IQueryable<int>);
         }
     }
 }

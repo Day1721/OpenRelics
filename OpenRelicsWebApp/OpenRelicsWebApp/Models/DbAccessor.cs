@@ -21,10 +21,15 @@ namespace OpenRelicsWebApp.Models
             return res.First();
         }
 
-        public IQueryable<int> GetDirectDescendants(int id) =>
-            from connection in _db.Connections
-            where connection.Ascendant == id
-            select connection.Descendant;
+        public List<int> GetDirectDescendants(int id)
+        {
+            var res =
+                from connection in _db.Connections
+                where connection.Ascendant == id
+                select connection.Descendant;
+
+            return res.ToList();
+        }
 
         public List<int> GetAllDescendants(int id)
         {

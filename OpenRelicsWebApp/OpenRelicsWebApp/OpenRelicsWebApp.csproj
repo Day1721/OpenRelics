@@ -232,6 +232,8 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Relics\Index.cshtml" />
     <Content Include="Views\Relics\GetById.cshtml" />
+    <Content Include="Views\Relics\GetDescendants.cshtml" />
+    <Content Include="Views\Relics\GetAllFromRegion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
