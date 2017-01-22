@@ -8,7 +8,9 @@ namespace OpenRelicsWebApp
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/relics").Include("~/Scripts/app.js"));
+            bundles.Add(new ScriptBundle("~/bundles/relics").Include(
+                        "~/Scripts/app.js",
+                        "~/Scripts/voivodeshipsAndDistricts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include("~/Scripts/angular.min.js"));
 

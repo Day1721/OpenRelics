@@ -173,6 +173,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatingParcer.cs" />
     <Compile Include="Models\DbAccessor.cs" />
     <Compile Include="Models\DbModels.cs" />
     <Compile Include="Models\RelicsDbContext.cs" />
@@ -203,6 +204,8 @@
     </Content>
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
+    <None Include="Properties\PublishProfiles\OpenRelics - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\OpenRelics - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -214,6 +217,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\voivodeshipsAndDistricts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -38,23 +38,31 @@
             <table>
                 <tr>
                     <td>@Html.Label("PlaceName", "Place name")</td>
-                    <td>@Html.TextBox("PlaceName")</td>
+                    <td><input type="text" name="PlaceName" id="PlaceName" class="my-input"
+                               ng-model="place" ng-pattern="^[a-z]+" /></td>
                 </tr>
                 <tr>
                     <td>@Html.Label("CommuneName", "Commune name")</td>
-                    <td>@Html.TextBox("CommuneName")</td>
+                    <td><input type="text" name="CommuneName" id="CommuneName" class="my-input"
+                               ng-model="commune" ng-pattern="^[a-z]+"/></td>
                 </tr>
                 <tr>
                     <td>@Html.Label("DistrictName", "District name")</td>
-                    <td>@Html.TextBox("DistrictName")</td>
+                    <td><select name="DistrictName" id="DistrictName"
+                                ng-model="selectedDistrict">
+                        <option ng-repeat="optDistrict in districts[selectedVoivodeship]">{{optDistrict}}</option>
+                    </select></td>
                 </tr>
                 <tr>
                     <td>@Html.Label("VoivodeshipName", "Voivodeship name")</td>
-                    <td>@Html.TextBox("VoivodeshipName")</td>
+                    <td><select name="VoivodeshipName" id="VoivodeshipName"
+                                ng-model="selectedVoivodeship" ng-selected="onVoivodeshipSelect()">
+                        <option ng-repeat="optVoivodeship in voivodeships">{{optVoivodeship}}</option>
+                    </select></td>
                 </tr>
             </table>
 
-            <input type="submit" value="Submit" class="btn" />
+            <input type="submit" value="Submit" class="btn" ng-disabled="!selectedVoivodeship" />
         }
     </div>
 </div>
