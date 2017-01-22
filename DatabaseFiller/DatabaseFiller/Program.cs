@@ -9,21 +9,24 @@ namespace DatabaseFiller
 {
     class Program
     {
-        private static Relic MakeRelic(RelictInputViewModel model) => new Relic
+        private static Relic MakeRelic(RelictInputViewModel model)
         {
-            Id = model.id,
-            Dating = model.dating_of_obj,
-            Latitude = model.latitude,
-            Longitude = model.longitude,
-            Name = model.identification,
-            RegisterNumber = model.register_number,
-            State = model.state,
-            PlaceId = model.place_id,
-            PlaceName = model.place_name,
-            CommuneName = model.commune_name,
-            DistrictName = model.district_name,
-            VoivodeshipName = model.voivodeship_name
-        };
+            return new Relic
+            {
+                Id = model.id,
+                Dating = model.dating_of_obj,
+                Latitude = model.latitude,
+                Longitude = model.longitude,
+                Name = model.identification,
+                RegisterNumber = model.register_number,
+                State = model.state,
+                PlaceId = model.place_id,
+                PlaceName = model.place_name,
+                CommuneName = model.commune_name,
+                DistrictName = model.district_name,
+                VoivodeshipName = model.voivodeship_name
+            };
+        }
 
         private static Tuple<List<Relic>, List<Connection>> GetDataFromInput(RelictInputViewModel model)
         {
@@ -52,7 +55,16 @@ namespace DatabaseFiller
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory());
             string path = Console.ReadLine();
-            string[] files = Directory.GetFiles(path);
+            string[] files;
+            try
+            {
+                files = Directory.GetFiles(path);
+            }
+            catch
+            {
+                Console.WriteLine("Input path is invalid");
+                return;
+            }
             var parsed = new {Relics = new List<Relic>(), Connections = new List<Connection>()};
             Console.Write("Parcing files... ");
             using (var progress = new ProgressBar())
@@ -72,11 +84,7 @@ namespace DatabaseFiller
                     progress.Report((double) counter / files.Length);
                 }
             }
-            var min1 = parsed.Connections.Min(con => con.Ascendant);
-            var min2 = parsed.Connections.Min(con => con.Descendant);
             Console.Write("\nCreating database with data... ");
-            int mindb1;
-            int mindb2;
             using (var db = new RelicsDbContext())
             using (var progress = new ProgressBar())
             {
@@ -95,13 +103,9 @@ namespace DatabaseFiller
                     progress.Report((double) counter / (parsed.Relics.Count + parsed.Connections.Count));
                 }
 
-                    Console.WriteLine($"\nDone. {db.SaveChanges()} changes made.\n" +
-                                  "Press any key to exit");
-                
-                mindb1 = db.Connections.Min(con => con.Ascendant);
-                mindb2 = db.Connections.Min(con => con.Descendant);
+                    Console.WriteLine("\nDone. {0} changes made.\n" +
+                                  "Press any key to exit", db.SaveChanges());
             }
-            System.Diagnostics.Debug.WriteLine($"{min1}, {min2}, {mindb1}, {mindb2}"); 
             Console.ReadKey();
         }
     }
