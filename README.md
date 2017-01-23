@@ -1,5 +1,7 @@
 ## Synopis
 
+	Simple Web App with API upon OpenRelics database.
+	Description of API can be found at /Help page of app
 
 ## Requirements
 
