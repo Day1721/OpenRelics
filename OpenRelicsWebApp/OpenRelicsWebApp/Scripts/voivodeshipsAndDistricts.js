@@ -1,6 +1,6 @@
 ﻿var app = angular.module('OpenRelicsAngular', []);
 
-app.controller('IndexController', function($scope, $http) {
+app.controller('IndexController', ['$scope', '$http', function($scope, $http) {
     $scope.voivodeships = [
         'dolnośląskie',
         'kujawsko-pomorskie',
@@ -434,4 +434,4 @@ app.controller('IndexController', function($scope, $http) {
             'wałecki'
         ]
     }
-})
+}])

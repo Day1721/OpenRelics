@@ -1,6 +1,6 @@
 ﻿var app = angular.module('OpenRelicsAngular', []);
 
-app.controller('IndexController', function ($scope, $http) {
+app.controller('IndexController', ['$scope', '$http', function ($scope, $http) {
     var queries;
     
     $http({
@@ -16,4 +16,4 @@ app.controller('IndexController', function ($scope, $http) {
     $scope.onSelect = function() {
         $scope.index = queries.indexOf($scope.selected);
     };
-});
+}]);
