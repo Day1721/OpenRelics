@@ -14,7 +14,7 @@ namespace DatabaseFiller.DbClasses
 
         static RelicsDbContext()
         {
-            Database.SetInitializer<RelicsDbContext>(new DbInitializer());
+            Database.SetInitializer(new DbInitializer());
             using (var db = new RelicsDbContext())
                 db.Database.Initialize(false);
         }

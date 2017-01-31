@@ -4,6 +4,7 @@ namespace OpenRelicsWebApp.Models
 {
     class RelicsDbContext : DbContext
     {
+        
         private class DbInitializer : IDatabaseInitializer<RelicsDbContext>
         {
             public void InitializeDatabase(RelicsDbContext context)
